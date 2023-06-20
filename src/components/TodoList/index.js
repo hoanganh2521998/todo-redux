@@ -4,11 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { addTodo } from "../../redux/actions";
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
-import { todoListSelector, searchTextSelector } from "../../redux/selectors";
+import {
+  todoListSelector,
+  searchTextSelector,
+  todosRemainingSelector,
+} from "../../redux/selectors";
 
 export default function TodoList() {
   const dispatch = useDispatch();
-  const todoList = useSelector(todoListSelector);
+  const todoList = useSelector(todosRemainingSelector);
   const searchText = useSelector(searchTextSelector);
 
   const [todoName, setTodoName] = useState("");
@@ -23,8 +27,8 @@ export default function TodoList() {
         completed: false,
       })
     );
-    setTodoName('');
-    setPriority('Medium');
+    setTodoName("");
+    setPriority("Medium");
   };
 
   const handleInputChange = (e) => {
@@ -42,7 +46,13 @@ export default function TodoList() {
         <Todo name='Learn Redux' prioriry='Medium' />
         <Todo name='Learn JavaScript' prioriry='Low' /> */}
         {todoList.map((todo) => (
-          <Todo key={todo.id} name={todo.name} prioriry={todo.priority} />
+          <Todo
+            key={todo.id}
+            id={todo.id}
+            name={todo.name}
+            prioriry={todo.priority}
+            completed={todo.completed}
+          />
         ))}
       </Col>
       <Col span={24}>
