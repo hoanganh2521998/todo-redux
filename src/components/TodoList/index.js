@@ -9,6 +9,7 @@ import {
   searchTextSelector,
   todosRemainingSelector,
 } from "../../redux/selectors";
+import todoListSlide from "./todoSlide";
 
 export default function TodoList() {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ export default function TodoList() {
 
   const handleAddButtonClick = () => {
     dispatch(
-      addTodo({
+      todoListSlide.actions.addTodo({
         id: uuidv4(),
         name: todoName,
         priority: priority,
